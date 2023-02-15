@@ -5,7 +5,7 @@ variable "rglocation" {
   type = list(string)
 }
 variable "subnet_id" {
-  type = any
+  type = list(string)
 }
 variable "resource_group_name" {
   type = string
