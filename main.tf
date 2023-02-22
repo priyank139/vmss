@@ -1,9 +1,3 @@
- data "azurerm_key_vault_secret" "azurepassword" {
-   name         = var.azurekyvaulsecretname 
-   key_vault_id = var.keyvaultid
- }
-
-
 
 resource "azurerm_windows_virtual_machine_scale_set" "vmss" {
   count                  = var.vm_type == "Windows" ? length(var.vm_name) : 0
@@ -12,7 +6,7 @@ resource "azurerm_windows_virtual_machine_scale_set" "vmss" {
   location            = element(var.rglocation, count.index ) 
   sku                 =  var.vm_size 
   instances           = var.number_of_instances
-  admin_password      = data.azurerm_key_vault_secret.azurepassword.value
+  admin_password      = var.azurepassword
   admin_username      = var.azureuser
   tags = merge(var.my_tags, {
     service = element(var.vm_name, count.index)
@@ -115,7 +109,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_ubuntu" {
   location            = element(var.rglocation, count.index ) 
   sku                 =  var.vm_size 
   instances           = var.number_of_instances
-  admin_password      = data.azurerm_key_vault_secret.azurepassword.value
+  admin_password      = var.azurepassword
   admin_username      = var.azureuser
     tags = merge(var.my_tags, {
     service = element(var.vm_name, count.index)
