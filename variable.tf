@@ -35,17 +35,11 @@ variable "skuwindows" {
 variable "azureuser" {
   type = string
 }
-# variable "azurepassword" {
-#   type = any
-# }
+ variable "azurepassword" {
+   type = any
+ }
 
 variable "keydata_path" {
-  type = string
-}
-variable "azurekyvaulsecretname" {
-  type = string
-}
-variable "keyvaultid" {
   type = string
 }
 variable "vmss_id" {
